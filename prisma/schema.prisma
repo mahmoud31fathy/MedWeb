@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Attendee {
+  id        String    @id @default(cuid())
+  name      String
+  email     String    @unique
+  phone     String
+  qrCode    String    @unique
+  attended  Boolean   @default(false)
+  scannedAt DateTime?
+  createdAt DateTime  @default(now())
+}
+
+model Admin {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String?
+  role      String   @default("SUBADMIN") // ADMIN or SUBADMIN
+  createdAt DateTime @default(now())
+}
