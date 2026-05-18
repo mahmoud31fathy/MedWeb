@@ -8,6 +8,8 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+
+
 model Attendee {
   id        String    @id @default(cuid())
   name      String
@@ -27,3 +29,24 @@ model Admin {
   role      String   @default("SUBADMIN") // ADMIN or SUBADMIN
   createdAt DateTime @default(now())
 }
+
+model Talk {
+  id          String   @id @default(cuid())
+  title       String
+  speaker     String
+  location    String
+  startTime   DateTime
+  imageUrl    String?
+  notified    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
+
+model ActivityLog {
+  id        String   @id @default(cuid())
+  action    String
+  details   String
+  adminName String
+  adminId   String
+  createdAt DateTime @default(now())
+}
+

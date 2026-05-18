@@ -2,8 +2,9 @@ import { SignJWT, jwtVerify } from 'jose';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
-const secretKey = 'secret123'; // In production, use process.env.JWT_SECRET
+const secretKey = process.env.JWT_SECRET || 'secret123';
 const key = new TextEncoder().encode(secretKey);
+
 
 export async function encrypt(payload: any) {
   return await new SignJWT(payload)
@@ -24,6 +25,12 @@ export async function getSession() {
   const session = (await cookies()).get('session')?.value;
   if (!session) return null;
   return await decrypt(session);
+}
+
+export async function verifyAuth(request: Request | NextRequest) {
+  const session = await getSession();
+  if (!session) return null;
+  return session;
 }
 
 export async function updateSession(request: NextRequest) {

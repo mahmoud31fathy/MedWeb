@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MedWeb Event Management System
 
-## Getting Started
+A premium, full-stack medical event management application built with Next.js, Prisma, and Supabase.
 
-First, run the development server:
+## 🚀 Features
 
+- **Admin Dashboard**: Real-time stats and attendee management.
+- **QR Code Check-in**: Secure scanning system for medical event entry.
+- **Admin Management**: Role-based access control (Super Admin vs. Subadmins).
+- **Automated Reminders**: Cron jobs for talk reminders and schedule updates.
+- **Responsive Design**: Modern, glassmorphism UI tailored for medical professionals.
+
+## 🛠️ Technology Stack
+
+- **Framework**: Next.js 15+ (App Router)
+- **Database**: PostgreSQL (via Supabase)
+- **ORM**: Prisma
+- **Auth**: JWT-based session management
+- **Styling**: Vanilla CSS with modern design tokens
+- **Icons**: Lucide React
+
+## 📦 Getting Started
+
+### 1. Install Dependencies
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Environment Setup
+Create a `.env` file with the following:
+```env
+DATABASE_URL="your_postgresql_url"
+DIRECT_URL="your_direct_postgresql_url"
+EMAIL_USER="your_gmail@gmail.com"
+EMAIL_PASS="your_gmail_app_password"
+JWT_SECRET="your_secure_secret"
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Database Initialization
+```bash
+npx prisma db push
+npm run prisma:seed
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4. Run Development Server
+```bash
+npm run dev
+```
 
-## Learn More
+## 🔐 Administrative Access
 
-To learn more about Next.js, take a look at the following resources:
+To initialize or update the Super Admin account, modify the credentials in `prisma/seed.js` and run:
+```bash
+npx prisma db seed
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📄 License
+This project is private and intended for MedWeb internal use.

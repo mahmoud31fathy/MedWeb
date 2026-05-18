@@ -20,6 +20,8 @@ export async function GET(req: NextRequest) {
       totalAttended,
       notAttended,
       attendees,
+      name: session.name,
+      email: session.email,
       role: session.role
     });
   } catch (error: any) {

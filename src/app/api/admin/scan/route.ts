@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { getSession } from '@/lib/auth';
+import { logActivity } from '@/lib/logger';
 
 export async function POST(req: NextRequest) {
   try {
@@ -21,6 +22,13 @@ export async function POST(req: NextRequest) {
       where: { qrCode },
       data: { attended: true, scannedAt: new Date() },
     });
+
+    await logActivity(
+      "Check-in Success",
+      `${session.name} checked in attendee: ${attendee.name}`,
+      session.id,
+      session.name || 'Admin'
+    );
 
     return NextResponse.json({ success: true, message: 'Scan successful', attendee: updated });
   } catch (error: any) {
