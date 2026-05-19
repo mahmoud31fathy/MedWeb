@@ -104,7 +104,7 @@ export default function TalksPage() {
       const res = await fetch('/api/admin/talks', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title, speaker, location, startTime, imageUrl }),
+        body: JSON.stringify({ title, speaker, location, startTime: new Date(startTime).toISOString(), imageUrl }),
       });
 
       if (!res.ok) {
